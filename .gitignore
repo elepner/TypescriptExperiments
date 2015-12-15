@@ -100,7 +100,7 @@ publish/
 packages/
 app/*.js
 app/*.js.map
-
+dist/
 # Windows Azure Build Output
 csx
 *.build.csdef

@@ -1,9 +1,25 @@
-<!DOCTYPE html>
 <html>
-<head>
-    <title>TypeScript Greeter</title>
-</head>
-<body>
-    <script src="app/app.js"></script>
-</body>
+
+  <head>
+    <title>Angular 2 QuickStart</title>
+
+    <!-- 1. Load libraries -->
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+
+    <!-- 2. Configure SystemJS -->
+    <script>
+      System.config({
+        packages: {'dist': {defaultExtension: 'js'}}
+      });
+      System.import('dist/boot');
+    </script>
+
+  </head>
+
+  <!-- 3. Display the application -->
+  <body>
+    <my-app>Loading...</my-app>
+  </body>
+
 </html>
