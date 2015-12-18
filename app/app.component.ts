@@ -4,7 +4,7 @@ import  {GraphComponents} from './core/graph'
 declare var dockspawn: any;
 @Component({
     selector: 'my-app',
-    templateUrl: 'app/ui/main.html'
+    templateUrl: 'app/html/main.html'
 })
 export class AppComponent {
     private a: number;
