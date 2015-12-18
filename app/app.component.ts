@@ -1,10 +1,12 @@
 import {Component} from 'angular2/core';
 
 import  {GraphComponents} from './core/graph'
+import {FabricJSHypernetCanvas} from './ui/fabric-js-directive/fabric-js-hypernet-canvas'
 declare var dockspawn: any;
 @Component({
     selector: 'my-app',
-    templateUrl: 'app/html/main.html'
+    templateUrl: 'app/html/main.html',
+    directives: [FabricJSHypernetCanvas]
 })
 export class AppComponent {
     private a: number;
@@ -29,7 +31,6 @@ export class AppComponent {
         var properties = new dockspawn.PanelContainer(document.getElementById("properties_window"), dockManager);
         var outline = new dockspawn.PanelContainer(document.getElementById("outline_window"), dockManager);
         var editor1 = new dockspawn.PanelContainer(document.getElementById("editor1_window"), dockManager);
-        var editor2 = new dockspawn.PanelContainer(document.getElementById("editor2_window"), dockManager);
         
 
         // Dock the panels on the dock manager
@@ -38,7 +39,6 @@ export class AppComponent {
         var solutionNode = dockManager.dockFill(outlineNode, hypernetWindow);
         var propertiesNode = dockManager.dockDown(outlineNode, properties, 0.6);
         var editor1Node = dockManager.dockFill(documentNode, editor1);
-        var editor2Node = dockManager.dockFill(documentNode, editor2);
         
         var jsonGraph: any = {
             vertices: [
