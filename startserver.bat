@@ -1,1 +1,1 @@
-call node server.js
+call npm run go

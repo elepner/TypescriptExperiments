@@ -1,4 +1,6 @@
 import {Component} from 'angular2/core';
+
+import  {GraphComponents} from './core/graph'
 declare var dockspawn: any;
 @Component({
     selector: 'my-app',
@@ -37,5 +39,22 @@ export class AppComponent {
         var propertiesNode = dockManager.dockDown(outlineNode, properties, 0.6);
         var editor1Node = dockManager.dockFill(documentNode, editor1);
         var editor2Node = dockManager.dockFill(documentNode, editor2);
+        
+        var jsonGraph: any = {
+            vertices: [
+                { id: 'a', x: 1, y: 1},
+                { id: 'b', x: 2, y: 3},
+                { id: 'c', x: 3, y: 3},
+                { id: 'd', x: 1, y: 3}
+            ],
+            edges: [
+                {from: 'a', to: 'b' },
+                {from: 'b', to: 'c' },
+                {from: 'c', to: 'd' },
+                {from: 'd', to: 'a' },
+                {from: 'a', to: 'c' },
+            ]
+        }
+        var graph = GraphComponents.Graph.fromJsonObject(jsonGraph);
     }
 }
