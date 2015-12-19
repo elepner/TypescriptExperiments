@@ -173,21 +173,4 @@ $RECYCLE.BIN/
 **/node_modules/*
 !**/node_modules/do_not_delete.txt
 
-
-# Generated bundle files
-bundle.js
-prebundle.js
-bundle.min.js
-prebundle.min.js
-Powel.Viewer.Web/scripts/app/bundle.min.js 
-Powel.Viewer.Web/scripts/app/prebundle.min.js 
-*.lnk
-
-# Local log files
-**/App_Data/Logs/
-
-# Local pdf files
-**/App_Data/PdfFiles/
-Powel.Viewer.Web/Scripts/dist/*.bundle.js
-Powel.Viewer.Web/Scripts/dist/angular-locale*.js
-Powel.Viewer.Web/Content/app.css
+typings/*
