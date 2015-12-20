@@ -1,6 +1,7 @@
-import {Component} from 'angular2/core';
+import {Component, Inject, QueryList, ViewQuery, AfterViewInit} from 'angular2/core';
 
 import  {GraphComponents} from './core/graph'
+import {HyperNetRenderer} from './ui/hypernet-renderer'
 import {FabricJSHypernetCanvas} from './ui/fabric-js-directive/fabric-js-hypernet-canvas'
 declare var dockspawn: any;
 @Component({
@@ -8,11 +9,40 @@ declare var dockspawn: any;
     templateUrl: 'app/html/main.html',
     directives: [FabricJSHypernetCanvas]
 })
-export class AppComponent {
+
+export class AppComponent implements AfterViewInit{
     private a: number;
-
-    constructor() {
-
+    private queryList : QueryList<FabricJSHypernetCanvas>;
+    private init: boolean;
+    ngAfterViewInit() {
+        console.log(this.queryList);
+        
+        var canvas = this.queryList.first;
+        var renderer = new HyperNetRenderer(this.getGraph(), canvas);
+        renderer.draw();
+    }
+    
+    private getGraph(): GraphComponents.Graph {
+        var jsonGraph: any = {
+            vertices: [
+                { id: 'a', x: 1, y: 1},
+                { id: 'b', x: 3, y: 1},
+                { id: 'c', x: 3, y: 3},
+                { id: 'd', x: 1, y: 3}
+            ],
+            edges: [
+                {from: 'a', to: 'b' },
+                {from: 'b', to: 'c' },
+                {from: 'c', to: 'd' },
+                {from: 'd', to: 'a' },
+                {from: 'a', to: 'c' },
+            ]
+        }
+        return GraphComponents.Graph.fromJsonObject(jsonGraph);
+    }
+    
+    constructor(@ViewQuery(FabricJSHypernetCanvas, {descendants: true}) queryList: QueryList<FabricJSHypernetCanvas>) {
+        this.queryList = queryList;
         var divDockManager = document.getElementById("my_dock_manager");
         var dockManager = new dockspawn.DockManager(divDockManager);
         dockManager.initialize();
@@ -40,21 +70,6 @@ export class AppComponent {
         var propertiesNode = dockManager.dockDown(outlineNode, properties, 0.6);
         var editor1Node = dockManager.dockFill(documentNode, editor1);
         
-        var jsonGraph: any = {
-            vertices: [
-                { id: 'a', x: 1, y: 1},
-                { id: 'b', x: 2, y: 3},
-                { id: 'c', x: 3, y: 3},
-                { id: 'd', x: 1, y: 3}
-            ],
-            edges: [
-                {from: 'a', to: 'b' },
-                {from: 'b', to: 'c' },
-                {from: 'c', to: 'd' },
-                {from: 'd', to: 'a' },
-                {from: 'a', to: 'c' },
-            ]
-        }
-        var graph = GraphComponents.Graph.fromJsonObject(jsonGraph);
+        
     }
 }

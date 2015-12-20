@@ -74,23 +74,24 @@ export module GraphComponents {
 
     export class Graph {
         private _edges: EdgeClass[];
-        private _vertices: Vertex[];
+        private _vertices: Map<string, Vertex>;
         public static fromJsonObject(jsonObject: any) {
             var vertices: any[] = jsonObject.vertices;
             var result = new Graph();
-            result._vertices = [];
+            result._vertices = new Map<string, Vertex>();
 
             vertices.forEach((vertexObj) => {
                 if (!vertexObj.x || !vertexObj.y || !vertexObj.id) {
                     throw new ConvertationError("Ivalid vertex in the input array");
                 }
-                result._vertices[vertexObj.id] = new VertexClass(vertexObj.x, vertexObj.y, vertexObj.id);
+                
+                result._vertices.set(vertexObj.id, new VertexClass(vertexObj.x, vertexObj.y, vertexObj.id));
             })
 
             var edges: any[] = jsonObject.edges;
             result._edges = edges.map((obj) => {
-                var node1 = result._vertices[obj.from];
-                var node2 = result._vertices[obj.to];
+                var node1 = result._vertices.get(obj.from);
+                var node2 = result._vertices.get(obj.from);
                 if (!node1 || !node2) {
                     throw new ConvertationError("Invalid edge in the input array");
                 }
@@ -99,10 +100,20 @@ export module GraphComponents {
             });
             return result;
         }
+        
+        public get edges() : Array<Edge> {
+            return this._edges;
+        }
+        
+        public get vertices() : Map<string, Vertex> {
+            return this._vertices;
+        }
     }
 
     export class ConvertationError extends Error {
-
+        constructor(message: string){
+            super();
+        }
     }
 }
 
