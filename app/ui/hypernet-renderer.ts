@@ -10,6 +10,7 @@ export class HyperNetRenderer {
 
     public draw() {
         this.graph.edges.forEach((edge) => {
+            debugger;
             this.canvas.drawLine(
                 { x: edge.from.x, y: edge.from.y },
                 { x: edge.to.x, y: edge.to.y });

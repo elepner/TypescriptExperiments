@@ -91,7 +91,7 @@ export module GraphComponents {
             var edges: any[] = jsonObject.edges;
             result._edges = edges.map((obj) => {
                 var node1 = result._vertices.get(obj.from);
-                var node2 = result._vertices.get(obj.from);
+                var node2 = result._vertices.get(obj.to);
                 if (!node1 || !node2) {
                     throw new ConvertationError("Invalid edge in the input array");
                 }

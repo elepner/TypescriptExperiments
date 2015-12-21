@@ -41,12 +41,14 @@ export class FabricJSHypernetCanvas implements HypernetCanvas {
     drawPoint(point: Point) {
         var cx = this.offsetX + this.aspect * point.x;
         var cy = this.offsetY + this.aspect * point.y;
+        var radius = 15;
         var p = new fabric.Circle({
             radius: 15,
             fill: "green",
-            left: cx,
-            top: cy
+            left: cx - radius,
+            top: cy - radius
         });
+        
         this.canvas.add(p);
     };
     
